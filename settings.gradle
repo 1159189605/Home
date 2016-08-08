@@ -1,0 +1,1 @@
+include ':app', ':usermanagement', ':details', ':release', ':release', ':personalmanagement'
