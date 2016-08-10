@@ -30,4 +30,6 @@ dependencies {
     compile project(':release')
     compile project(':release')
     compile project(':usermanagement')
+    compile files('android-auto-scroll-view-pager.jar')
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

@@ -21,7 +21,7 @@ public class MainActivity extends FragmentActivity {
                 ft.add(R.id.fragmnet_bant, new HomepageFragment());
                 ft.commit();
             }
-            // woshinidie
+
                 break;
             case R.id.main_bant2:{
                 fm=getSupportFragmentManager();
