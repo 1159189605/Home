@@ -49,7 +49,7 @@ public class User_Login extends Activity{
                 send_code_c.setText("重新获取");
                 send_code_c.setEnabled(true);
             }else{
-                send_code_c.setText(msg.obj+",秒后重新获取");
+                send_code_c.setText(msg.obj+"秒后重新获取");
             }
         }
     };

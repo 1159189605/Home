@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.a123.homelvoe.fragment.HomepageFragment;
 import com.example.a123.homelvoe.fragment.PersonalFragment;
@@ -37,10 +38,12 @@ public class MainActivity extends FragmentActivity {
                 ft.commit();
             }
                 break;
+
         }
 
 
     }
+
 
 
 
@@ -55,6 +58,19 @@ public class MainActivity extends FragmentActivity {
         FragmentTransaction ft=fm.beginTransaction();
         ft.add(R.id.fragmnet_bant,new HomepageFragment());
         ft.commit();
+
+        ImageButton ceshi_c=(ImageButton) findViewById(R.id.ceshi);
+
+        ceshi_c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it=new Intent();
+                it.setClass(MainActivity.this, com.example.usermanagement.MainActivity.class);
+                startActivity(it);
+            }
+        });
+
+
 
 
     }

@@ -15,24 +15,18 @@ public class Forgetpwd extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgetpwd_layout);
 
-        final ImageView i1=(ImageView) findViewById(R.id.forgetpwd_return_btn);
+        //按钮点击跳转
+        ImageView i1 = (ImageView) findViewById(R.id.forgetpwd_return_btn);
 
-        View.OnClickListener clickListener=new View.OnClickListener(){
+        i1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final Intent it = new Intent();
-
-                i1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        it.setClass(Forgetpwd.this,MainActivity.class);
-                    }
-                });
-                startActivity(it);
+                Intent it = new Intent();
+                it.setClass(Forgetpwd.this, MainActivity.class);
+                //刷新
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(it, 1000);
             }
-
-        };
-        i1.setOnClickListener(clickListener);
+        });
     }
 }

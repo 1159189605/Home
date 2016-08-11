@@ -49,6 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/lingdang"
+        android:id="@+id/ceshi"
+        android:onClick="myclick"
+
 
         android:layout_weight="1"
         android:layout_gravity="center"/>
