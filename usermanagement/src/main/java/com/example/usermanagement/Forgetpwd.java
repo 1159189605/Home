@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.usermanagement.MainActivity;
-import com.example.usermanagement.R;
-
 /**
  * Created by andfoot on 2016/8/9.
  */

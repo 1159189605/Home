@@ -17,6 +17,8 @@ import android.widget.ImageView;
 
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -29,7 +31,12 @@ import org.xutils.x;
  */
 public class User_Login extends Activity{
 
+    EditText acount_et;
+    EditText pwd_et;
+    EditText pwd_again_et;
+    EditText code_et;
     EditText phone_et;
+
     Button send_code_c;
 
 
@@ -112,7 +119,84 @@ public class User_Login extends Activity{
         });
 
         //点击注册按钮核对验证码并注册用户信息
+        Button login_btn_c=(Button) findViewById(R.id.login_btn);
 
+
+        login_btn_c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //验证码
+                code_et=(EditText) findViewById(R.id.code_btn);
+                final String code_text=code_et.getText().toString();
+                //用户帐号
+                acount_et=(EditText)findViewById(R.id.user_acount_btn);
+                String aount_text=acount_et.getText().toString();
+                //用户密码
+                pwd_et=(EditText)findViewById(R.id.user_pwd_btn);
+                final String pwd_text=pwd_et.getText().toString();
+                //确认密码
+                pwd_again_et=(EditText)findViewById(R.id.pwd_again_btn);
+                final String pwd_again_text=pwd_again_et.getText().toString();
+                //电话号码
+                final String phone_text_zc=phone_et.getText().toString();
+
+                //判断1   验证码是否正确
+                RequestParams rp_yzm=new RequestParams("http://123.206.87.139/LoveHomeTownServer/checkCode?code="+code_text);
+
+                //JSON解析
+                x.http().get(rp_yzm, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.v("TAG",result);
+                        try {
+                            JSONObject data=new JSONObject(result);
+                            String msg=data.getString("msg");
+                            Log.v("TAG","msg:"+msg);
+
+                            if (msg.equals("success")){
+                                Log.e("TAG","判断1");
+                                //判断2   两次密码输入是否一致
+                                if (pwd_text.equals(pwd_again_text)){
+                                    RequestParams rp_zc=new RequestParams("http://123.206.87.139/LoveHomeTownServer/registerUser"+"?phone="+phone_text_zc+"?pwd="+pwd_text+"?code="+code_text);
+                                    Log.e("TAG","Login_URL:"+rp_zc);
+
+                                    Intent zc_it=new Intent();
+                                    zc_it.setClass(User_Login.this,MainActivity.class);
+                                    zc_it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(zc_it);
+
+                                    Toast.makeText(User_Login.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(User_Login.this, "密码输入不一致", Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                Toast.makeText(User_Login.this, "验证码输入错误", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
+
+
+            }
+        });
 
 
 
