@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="#ffff"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:id="@+id/item_tu"
         android:src="@mipmap/defualt"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,18 +30,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/item_name"
                     android:text="东方明珠"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/item_per"
                     android:text="500元/每人"/>
 
             </LinearLayout>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-              android:layout_gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/listphone"
                 android:src="@mipmap/list_phone"/>
 
 
@@ -53,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/item_adress"
                 android:text="明珠广场"/>
             <TextView
             android:layout_width="wrap_content"
@@ -68,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/item_time"
                 android:text="时间"/>
 
         </LinearLayout>

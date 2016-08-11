@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,14 +37,19 @@ import java.util.ArrayList;
 public class HomeGridFragment extends Fragment {
     ArrayList<String> name=new ArrayList<>();
     ArrayList<String> image=new ArrayList<>();
+    GridView gridView;
+    BaseAdapter baseAdapter;
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.homeviewpage_fragment,null);
-        GridView gridView=(GridView) view.findViewById(R.id.home_grid);
+        gridView=(GridView) view.findViewById(R.id.home_grid);
+
         Log.e("TAG", "hahah");
         wangluo();
-        gridView.setAdapter(new BaseAdapter() {
+
+        baseAdapter=new BaseAdapter() {
             @Override
             public int getCount() {
                 return name.size();
@@ -64,16 +70,18 @@ public class HomeGridFragment extends Fragment {
                 view=LayoutInflater.from(getContext()).inflate(R.layout.home_griditem,null);
 
                 ((TextView)view.findViewById(R.id.home_grid_tv)).setText(name.get(i));
-                Bitmap bitmap = getHttpBitmap(image.get(i));
 
-
-
-
-              ((ImageView)view.findViewById(R.id.home_grid_im)).setImageBitmap(bitmap);
+                Picasso.with(getContext()).load(image.get(i)).into((ImageView)view.findViewById(R.id.home_grid_im));
 
                 return view;
             }
-        });
+        };
+        gridView.setAdapter(baseAdapter);
+
+
+
+
+
 
         return view;
 
@@ -81,6 +89,7 @@ public class HomeGridFragment extends Fragment {
 
 
     }
+
     public void wangluo(){
         RequestParams requestParams=new RequestParams("http://123.206.87.139/LoveHomeTownServer/printCategory");
         x.http().get(requestParams, new Callback.CommonCallback<String>() {
@@ -94,6 +103,9 @@ public class HomeGridFragment extends Fragment {
                 }
                 Log.e("TAG",imagetype.getList().get(7).getParent_cate_name());
                 Log.e("TAG",imagetype.getList().get(7).getParent_cate_img_url());
+                baseAdapter.notifyDataSetChanged();
+
+
             }
 
             @Override
@@ -113,32 +125,6 @@ public class HomeGridFragment extends Fragment {
             }
         });
 
-    }
-    public static Bitmap getHttpBitmap(String url){
-        URL myFileURL;
-        Bitmap bitmap=null;
-        try{
-            myFileURL = new URL(url);
-            //获得连接
-            HttpURLConnection conn=(HttpURLConnection)myFileURL.openConnection();
-            //设置超时时间为6000毫秒，conn.setConnectionTiem(0);表示没有时间限制
-            conn.setConnectTimeout(6000);
-            //连接设置获得数据流
-            conn.setDoInput(true);
-            //不使用缓存
-            conn.setUseCaches(false);
-            //这句可有可无，没有影响
-            //conn.connect();
-            //得到数据流
-            InputStream is = conn.getInputStream();
-            //解析得到图片
-            bitmap = BitmapFactory.decodeStream(is);
-            //关闭数据流
-            is.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return bitmap;
     }
 
 
