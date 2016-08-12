@@ -2,6 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#895654">
+    android:background="#ffff">
+    <LinearLayout
+        android:id="@+id/person_btn"
+        android:onClick="myclick"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="#00EE00">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/mrtx_pic"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@mipmap/img_my_fragment_title_right"
+            android:layout_gravity="center"
+            android:layout_marginLeft="300dp"/>
+    </LinearLayout>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lt"></ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"></LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/btn_large_green"
+        android:text="退出登录"/>
 </LinearLayout>
