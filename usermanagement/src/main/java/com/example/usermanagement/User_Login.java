@@ -17,6 +17,9 @@ import android.widget.ImageView;
 
 import android.widget.Toast;
 
+import com.example.usermanagement.database.CreatSQL;
+import com.example.usermanagement.database.UserSQL;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.Callback;
@@ -47,6 +50,7 @@ public class User_Login extends Activity{
         public void handleMessage(Message msg){
             if ((int)msg.obj == 0){
                 send_code_c.setText("重新获取");
+                send_code_c.setTextSize(15);
                 send_code_c.setEnabled(true);
             }else{
                 send_code_c.setText(msg.obj+"秒后重新获取");
@@ -130,7 +134,7 @@ public class User_Login extends Activity{
                 final String code_text=code_et.getText().toString();
                 //用户帐号
                 acount_et=(EditText)findViewById(R.id.user_acount_btn);
-                String aount_text=acount_et.getText().toString();
+                final String acount_text=acount_et.getText().toString();
                 //用户密码
                 pwd_et=(EditText)findViewById(R.id.user_pwd_btn);
                 final String pwd_text=pwd_et.getText().toString();
@@ -160,9 +164,10 @@ public class User_Login extends Activity{
                                     RequestParams rp_zc=new RequestParams("http://123.206.87.139/LoveHomeTownServer/registerUser"+"?phone="+phone_text_zc+"?pwd="+pwd_text+"?code="+code_text);
                                     Log.e("TAG","Login_URL:"+rp_zc);
 
+                                    new UserSQL(User_Login.this).addUser(acount_text,pwd_text,phone_text_zc,User_Login.this);
+
                                     Intent zc_it=new Intent();
                                     zc_it.setClass(User_Login.this,MainActivity.class);
-                                    zc_it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(zc_it);
 
                                     Toast.makeText(User_Login.this, "注册成功", Toast.LENGTH_SHORT).show();
@@ -180,7 +185,7 @@ public class User_Login extends Activity{
 
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
-
+                        Toast.makeText(User_Login.this, "错误", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

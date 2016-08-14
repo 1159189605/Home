@@ -40,6 +40,7 @@
         android:id="@+id/viewSwitcher" />
 
     <EditText
+        android:id="@+id/m_account_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -58,6 +59,7 @@
 
     <!--密码输入-->
     <EditText
+        android:id="@+id/m_pwd_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="密码"
@@ -75,6 +77,7 @@
 
     <!--登录按钮-->
     <Button
+        android:id="@+id/go_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登录"
